@@ -5,10 +5,11 @@ import { CategoriesSection } from "../../feature/components/categories-section/c
 import { ProductsSection } from "../../feature/components/products-section/products-section";
 import { HighligthSection } from "../../feature/components/highligth-section/highligth-section";
 import { NewsLetterSection } from "../../feature/components/news-letter-section/news-letter-section";
+import { Footer } from "../../feature/components/footer/footer";
 
 @Component({
   selector: 'app-main-layout',
-  imports: [HomeHeader, HeroSection, CategoriesSection, ProductsSection, HighligthSection, NewsLetterSection],
+  imports: [HomeHeader, HeroSection, CategoriesSection, ProductsSection, HighligthSection, NewsLetterSection, Footer],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.scss',
 })
