@@ -1,6 +1,23 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { App } from './app/app';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { LOCALE_ID } from '@angular/core';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { TokenInterceptor } from './app/auth/token-interceptor.interceptor';
+import { routes } from './app/app.routes';
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(App, {
+  providers: [
+    ConfirmationService,
+    MessageService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    provideHttpClient(
+      withInterceptors([TokenInterceptor])
+    ),
+    provideRouter(routes),
+
+    ...appConfig.providers,
+  ],
+}).catch((err) => console.error(err));

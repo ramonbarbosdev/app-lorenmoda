@@ -7,16 +7,16 @@ export const LorenPreset = definePreset(Lara, {
         colorScheme: {
             light: {
                 content: {
-  background: 'rgb(var(--bg-primary))',
-  borderColor: 'rgba(0, 0, 0, 0.08)',
-  color: 'rgb(var(--text-primary))'
-},
+                    background: 'rgb(var(--bg-primary))',
+                    borderColor: 'rgba(0, 0, 0, 0.08)',
+                    color: 'rgb(var(--text-primary))'
+                },
                 surface: {
                     0: 'rgb(var(--bg-primary))',
                     50: 'rgb(var(--bg-primary))',
                     100: 'rgb(var(--bg-secundary))',
                     200: 'rgb(var(--bg-header))',
-                      300: 'rgba(0,0,0,0.08)' // usado para bordas
+                    300: 'rgba(0,0,0,0.08)' // usado para bordas
                 },
 
                 primary: {
@@ -34,9 +34,12 @@ export const LorenPreset = definePreset(Lara, {
                 },
 
                 highlight: {
-                    background: 'rgba(var(--accent), 0.15)',
-                    color: 'rgb(var(--text-primary))'
+                    background: 'rgba(var(--accent), 0.08)',
+                    focusBackground: 'rgba(var(--accent), 0.12)',
+                    color: 'rgb(var(--text-primary))',
+                    focusColor: 'rgb(var(--text-primary))'
                 },
+              
 
                 focusRing: {
                     shadow: '0 0 0 2px rgba(var(--accent), 0.3)'
@@ -61,17 +64,17 @@ export const LorenPreset = definePreset(Lara, {
             },
 
             dark: {
-  content: {
-  background: 'rgb(var(--bg-surface))',
-  borderColor: 'rgba(255, 255, 255, 0.08)',
-  color: 'rgb(var(--text-primary))'
-},
+                content: {
+                    background: 'rgb(var(--bg-surface))',
+                    borderColor: 'rgba(255, 255, 255, 0.08)',
+                    color: 'rgb(var(--text-primary))'
+                },
                 surface: {
                     0: 'rgb(var(--bg-primary))',
                     50: 'rgb(var(--bg-primary))',
                     100: 'rgb(var(--bg-surface))',
                     200: 'rgb(var(--bg-header))',
-                   300: 'rgba(0,0,0,0.08)' 
+                    300: 'rgba(0,0,0,0.08)'
                 },
 
                 primary: {

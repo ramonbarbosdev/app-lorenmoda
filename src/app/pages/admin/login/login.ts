@@ -25,7 +25,7 @@ export class Login {
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required]],
       senha: ['', Validators.required]
     });
   }
@@ -36,13 +36,12 @@ export class Login {
     this.loading = true;
     this.error = null;
 
-    // Simulação de login
     setTimeout(() => {
       const { email, senha } = this.form.value;
 
-      if (email === 'admin@loren.com' && senha === '123456') {
-        localStorage.setItem('adminToken', 'mock-token');
-        this.router.navigate(['/admin']);
+      if (email === 'admin' && senha === 'admin') {
+        // localStorage.setItem('adminToken', 'mock-token');
+        this.router.navigate(['/admin/dashboard']);
       } else {
         this.error = 'Credenciais inválidas';
       }

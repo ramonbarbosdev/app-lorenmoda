@@ -1,0 +1,199 @@
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { MessageService } from 'primeng/api';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class BaseService {
+  private readonly apiUrl = `${environment.apiUrl}`;
+  private messageService = inject(MessageService);
+
+  constructor(private http: HttpClient) { }
+
+
+
+  findSequence(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}/sequencia`;
+
+    return this.http.get<any>(url).pipe(
+      tap((res) => {
+        return res;
+      }),
+      catchError((e) => {
+        console.log(e);
+        this.exibirErros(e);
+        return throwError(() => e);
+      })
+    );
+  }
+
+  findSequenceDetalhe(endpoint: string, id: number): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}/sequencia-detalhe/${id}`;
+
+    return this.http.get<any>(url).pipe(
+      tap((res) => {
+        return res;
+      }),
+      catchError((e) => {
+        console.log(e);
+        this.exibirErros(e);
+        return throwError(() => e);
+      })
+    );
+  }
+
+  findAll(endpoint: string): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+
+    return this.http.get<any>(url).pipe(
+      tap((res) => {
+        return res;
+      }),
+      catchError((e) => {
+        console.log(e);
+        this.exibirErros(e);
+        return throwError(() => e);
+      })
+    );
+  }
+  
+  listarPaginado(
+    endpoint: string,
+    page: number,
+    size: number,
+    search?: string,
+    columnFilters: any = {},
+    sorts: string[] = []
+  ) {
+    const params: any = { page, size };
+
+    // filtro global
+    if (search) {
+      params.search = search;
+    }
+
+    // filtros por coluna
+    Object.keys(columnFilters).forEach((key) => {
+      params[key] = columnFilters[key];
+    });
+
+    if (sorts.length > 0) {
+      params.sort = sorts; // Spring aceita array
+    }
+
+    return this.http.get<any>(`${this.apiUrl}/${endpoint}`, { params });
+  }
+
+
+  findById(endpoint: string, id: any): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}/${id}`;
+
+    return this.http.get<any>(url).pipe(
+      tap((res) => {
+        return res;
+      }),
+      catchError((e) => {
+        console.log(e);
+        this.exibirErros(e);
+        return throwError(() => e);
+      })
+    );
+  }
+
+  createMestreDetalhe(endpoint: string, data: any): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}/cadastrar`;
+
+    return this.http.post<any>(url, data).pipe(
+      tap((res) => {
+        this.exibirSucesso(res);
+        return res;
+      }),
+      catchError((e) => {
+        console.log(e);
+        this.exibirErros(e);
+        return throwError(() => e);
+      })
+    );
+  }
+
+  create(endpoint: string, data: any): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+
+    return this.http.post<any>(url, data).pipe(
+      tap((res) => {
+        this.exibirSucesso(res);
+        return res;
+      }),
+      catchError((e) => {
+        console.log(e);
+        this.exibirErros(e);
+        return throwError(() => e);
+      })
+    );
+  }
+
+  post(endpoint: string, data: any): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+
+    return this.http.post<any>(url, data).pipe(
+      tap((res) => {
+        return res;
+      }),
+      catchError((e) => {
+        console.log(e);
+        this.exibirErros(e);
+        return throwError(() => e);
+      })
+    );
+  }
+
+  update(endpoint: string, data: any): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+
+    return this.http.put<any>(url, data).pipe(
+      tap((res) => {
+        this.exibirSucesso(res);
+        return res;
+      }),
+      catchError((e) => {
+        console.log(e);
+        this.exibirErros(e);
+        return throwError(() => e);
+      })
+    );
+  }
+
+  deleteById(endpoint: string, id: number): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}/${id}`;
+
+    return this.http.delete<any>(url).pipe(
+      tap((res) => {
+        this.exibirSucesso(res);
+        return res;
+      }),
+      catchError((e) => {
+        console.log(e);
+        this.exibirErros(e);
+        return throwError(() => e);
+      })
+    );
+  }
+
+  exibirErros(e: any) {
+    this.messageService.add({
+      severity: 'error',
+      summary: e.error.message,
+      detail: e.error.codeDescription,
+    });
+  }
+  exibirSucesso(res: any) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Sucesso',
+      detail: res.message,
+    });
+  }
+}

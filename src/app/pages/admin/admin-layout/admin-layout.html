@@ -1,0 +1,117 @@
+<div class="flex min-h-screen  bg-[rgb(var(--bg-primary))] relative">
+
+  <div *ngIf="sidebarOpen && isMobile"
+       (click)="closeSidebar()"
+       class="fixed inset-0 bg-black/40 z-40 lg:hidden">
+  </div>
+
+  <aside
+    class="transition-all duration-300
+            bg-[rgb(var(--bg-primary))]
+           border-r border-black/5
+           px-6 py-8
+           z-50
+           fixed lg:static
+           h-full"
+    [ngClass]="{
+      'w-80 translate-x-0': sidebarOpen,
+      'w-full -translate-x-full lg:translate-x-0': !sidebarOpen,
+      'lg:w-30': !sidebarOpen && !isMobile
+    }">
+
+    <div class="mb-12">
+      <div class="w-10 h-[2px] bg-[rgb(var(--accent))] mb-4"></div>
+
+      <h2 class="font-display tracking-[0.2em] text-sm" >
+        LOREN MODAS
+      </h2>
+      
+    </div>
+
+    <nav class="space-y-6 text-sm">
+
+      <a routerLink="/admin/dashboard"
+         (click)="closeSidebar()"
+         class="flex items-center gap-3 
+                text-[rgb(var(--text-secondary))]
+                hover:text-[rgb(var(--accent))]
+                transition">
+
+        <i class="pi pi-chart-line"></i>
+        <span *ngIf="sidebarOpen">Dashboard</span>
+      </a>
+
+       <a routerLink="/admin/categorias"
+         (click)="closeSidebar()"
+         class="flex items-center gap-3 
+                text-[rgb(var(--text-secondary))]
+                hover:text-[rgb(var(--accent))]
+                transition">
+
+        <i class="pi pi-tags"></i>
+        <span *ngIf="sidebarOpen">Categorias</span>
+      </a>
+
+      <a routerLink="/admin/produtos"
+         (click)="closeSidebar()"
+         class="flex items-center gap-3 
+                text-[rgb(var(--text-secondary))]
+                hover:text-[rgb(var(--accent))]
+                transition">
+
+        <i class="pi pi-box"></i>
+        <span *ngIf="sidebarOpen">Produtos</span>
+      </a>
+
+     
+
+    </nav>
+
+  </aside>
+
+  <div class="flex-1 flex flex-col lg:ml-0">
+
+    <header class="flex items-center justify-between
+                   px-6 lg:px-8 py-5
+                   border-b border-black/5
+                   bg-[hsl(var(--background))]">
+
+      <div class="flex items-center gap-4">
+
+        <button
+          (click)="toggleSidebar()"
+          class="text-[rgb(var(--text-secondary))]
+                 hover:text-[rgb(var(--accent))] transition">
+
+          <i class="pi pi-bars"></i>
+        </button>
+
+        <h1 class="font-display text-lg tracking-wide">
+          Painel Administrativo
+        </h1>
+
+      </div>
+
+      <div class="flex items-center gap-6">
+
+        <button class="text-[rgb(var(--text-secondary))]
+                       hover:text-[rgb(var(--accent))] transition">
+          <i class="pi pi-moon"></i>
+        </button>
+
+        <button class="text-[rgb(var(--text-secondary))]
+                       hover:text-red-500 transition">
+          <i class="pi pi-sign-out"></i>
+        </button>
+
+      </div>
+
+    </header>
+
+    <main class="flex-1 p-6 lg:p-10">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>
