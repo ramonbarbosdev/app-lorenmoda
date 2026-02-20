@@ -1,0 +1,67 @@
+<section class="px-6 md:px-10 py-20 md:py-28">
+
+  <!-- Title -->
+  <div class="text-center mb-14">
+
+    <p class="uppercase tracking-[0.3em] text-[11px]
+              text-[rgb(var(--text-secondary))] mb-3">
+      Explore
+    </p>
+
+    <h2 class="font-display text-3xl md:text-5xl
+               text-[rgb(var(--text-primary))]">
+      Categorias
+    </h2>
+
+  </div>
+
+  <!-- Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+
+    <a *ngFor="let cat of categories"
+       href="#"
+       class="group relative aspect-[3/4] overflow-hidden block">
+
+      <!-- Image -->
+      <img
+        [src]="cat.image"
+        [alt]="cat.name"
+        class="w-full h-full object-cover
+               transition-transform duration-700
+               group-hover:scale-105"
+        loading="lazy" />
+
+      <!-- Overlay -->
+      <div class="absolute inset-0
+                  bg-[rgb(var(--text-primary)/0.2)]
+                  group-hover:bg-[rgb(var(--text-primary)/0.35)]
+                  transition-colors duration-500">
+      </div>
+
+      <!-- Content -->
+      <div class="absolute inset-0 flex flex-col
+                  items-center justify-end pb-10">
+
+        <h3 class="font-display text-2xl md:text-3xl
+                   font-light tracking-wide
+                   text-[rgb(var(--bg-primary))]">
+          {{ cat.name }}
+        </h3>
+
+        <span class="mt-2 uppercase tracking-[0.3em]
+                     text-[10px]
+                     text-[rgb(var(--bg-primary)/0.8)]
+                     border-b border-[rgb(var(--bg-primary)/0.4)]
+                     pb-0.5
+                     group-hover:border-[rgb(var(--bg-primary))]
+                     transition-colors duration-300">
+          Ver Mais
+        </span>
+
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
