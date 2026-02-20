@@ -1,0 +1,196 @@
+<header
+  class="fixed top-0 left-0 right-0 z-50
+         backdrop-blur-md
+         border-b border-[rgb(var(--text-secondary)/0.15)]
+         bg-[rgb(var(--bg-primary)/0.85)]
+         transition-all duration-500 ease-[cubic-bezier(.16,1,.3,1)]"
+  [class.shadow-md]="scrolled">
+
+  <div
+    class="px-6 md:px-10 flex items-center justify-between
+           transition-all duration-500"
+    [class.h-14]="scrolled"
+    [class.h-20]="!scrolled">
+
+    <a href="#"
+       class="font-display leading-none tracking-[0.15em]
+              transition-all duration-500"
+       [class.text-xl]="scrolled"
+       [class.text-3xl]="!scrolled">
+      LOREN MODAS
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8">
+      <a *ngFor="let link of navLinks"
+         href="#"
+         class="text-[11px] uppercase tracking-[0.25em]
+                text-[rgb(var(--text-secondary))]
+                hover:text-[rgb(var(--text-primary))]
+                transition-colors duration-300">
+        {{ link }}
+      </a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+
+      <!-- THEME -->
+      <button
+        (click)="theme.toggleTheme()"
+        class="p-1.5 rounded-full
+               text-[rgb(var(--text-secondary))]
+               hover:text-[rgb(var(--accent))]
+               transition">
+
+        <svg *ngIf="theme.theme() === 'dark'; else moonIcon"
+             class="w-[18px] h-[18px]"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4"/>
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41
+               M17.66 17.66l1.41 1.41
+               M2 12h2M20 12h2
+               M6.34 17.66l-1.41 1.41
+               M19.07 4.93l-1.41 1.41"/>
+        </svg>
+
+        <ng-template #moonIcon>
+          <svg class="w-[18px] h-[18px]"
+               fill="none"
+               stroke="currentColor"
+               stroke-width="1.5"
+               viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21 12.79A9 9 0 1111.21 3
+                 7 7 0 0021 12.79z"/>
+          </svg>
+        </ng-template>
+      </button>
+
+      <!-- SEARCH -->
+      <button
+        class="p-1.5 text-[rgb(var(--text-secondary))]
+               hover:text-[rgb(var(--accent))]
+               transition">
+
+        <svg class="w-[18px] h-[18px]"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-4.35-4.35"/>
+        </svg>
+      </button>
+
+      <!-- USER -->
+      <button
+        class="hidden sm:block p-1.5
+               text-[rgb(var(--text-secondary))]
+               hover:text-[rgb(var(--accent))]
+               transition">
+
+        <svg class="w-[18px] h-[18px]"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             viewBox="0 0 24 24">
+          <circle cx="12" cy="7" r="4"/>
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M5.5 21a6.5 6.5 0 0113 0"/>
+        </svg>
+      </button>
+
+      <!-- CART -->
+      <button
+        class="relative p-1.5
+               text-[rgb(var(--text-secondary))]
+               hover:text-[rgb(var(--accent))]
+               transition">
+
+        <svg class="w-[18px] h-[18px]"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M6 2l1 4h13l-1.5 9h-11z"/>
+        </svg>
+
+        <span
+          class="absolute -top-1 -right-1
+                 w-4 h-4
+                 bg-[rgb(var(--accent))]
+                 text-[rgb(var(--bg-primary))]
+                 rounded-full
+                 text-[10px]
+                 flex items-center justify-center
+                 font-medium">
+          2
+        </span>
+      </button>
+
+      <!-- MOBILE TOGGLE -->
+      <button
+        class="lg:hidden p-1.5"
+        (click)="toggleMenu()">
+
+        <svg *ngIf="!menuOpen; else closeIcon"
+             class="w-5 h-5"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.5"
+             viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+
+        <ng-template #closeIcon>
+          <svg class="w-5 h-5"
+               fill="none"
+               stroke="currentColor"
+               stroke-width="1.5"
+               viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M6 6l12 12M6 18L18 6"/>
+          </svg>
+        </ng-template>
+
+      </button>
+
+    </div>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <nav
+    [@mobileMenu]="menuOpen ? 'open' : 'closed'"
+    class="lg:hidden overflow-hidden
+           border-t border-[rgb(var(--text-secondary)/0.15)]
+           bg-[rgb(var(--bg-primary)/0.95)]
+           backdrop-blur-md">
+
+    <div class="px-6 py-6 flex flex-col gap-6">
+
+      <a *ngFor="let link of navLinks"
+         href="#"
+         (click)="toggleMenu()"
+         class="font-display text-xl font-light tracking-wide
+                text-[rgb(var(--text-primary))]
+                hover:text-[rgb(var(--accent))]
+                transition-colors duration-300">
+        {{ link }}
+      </a>
+
+    </div>
+  </nav>
+
+</header>
+
+<!-- OVERLAY -->
+<div *ngIf="menuOpen"
+     class="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
+     (click)="toggleMenu()">
+</div>

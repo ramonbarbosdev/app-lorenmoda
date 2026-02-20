@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import "primeicons/primeicons.css";
+@import "../src/style/keyframe.scss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500;600;700&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg-primary: 244 241 236;   /* #F4F1EC */
+  --bg-header: 237 231 223;    /* #EDE7DF */
+
+  --text-primary: 43 42 40;    /* #2B2A28 */
+  --text-secondary: 140 132 122; /* #8C847A */
+
+  --accent: 176 138 90;        /* #B08A5A */
+  --hover: 31 30 28;           /* #1F1E1C */
+}
+
+/* =========================
+   🌙 DARK THEME
+========================= */
+.dark {
+  --bg-primary: 20 19 18;      /* #141312 */
+  --bg-header: 27 26 24;       /* #1B1A18 */
+  --bg-surface: 36 34 32;      /* #242220 */
+
+  --text-primary: 241 237 232; /* #F1EDE8 */
+  --text-secondary: 154 145 134; /* #9A9186 */
+
+  --accent: 198 164 108;       /* #C6A46C */
+  --hover: 255 255 255;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: rgb(var(--bg-primary));
+  color: rgb(var(--text-primary));
+}
