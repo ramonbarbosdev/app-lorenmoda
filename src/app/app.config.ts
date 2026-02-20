@@ -4,10 +4,23 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
 
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeuix/themes/aura';
+import { LorenPreset } from './layout/Theme/loren-preset';
+
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-     provideAnimations()
+    provideAnimations(),
+    providePrimeNG({
+      theme: {
+        preset: LorenPreset,
+        options: {
+          darkModeSelector: '.dark'
+        }
+      }
+    })
   ]
 };

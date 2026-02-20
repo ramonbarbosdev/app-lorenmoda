@@ -1,0 +1,76 @@
+<section class="relative min-h-screen flex items-center justify-center
+                bg-[hsl(var(--background))]
+                text-[hsl(var(--foreground))]
+                px-6 overflow-hidden">
+
+  <!-- Fundo sutil premium -->
+  <div class="absolute inset-0 
+              bg-[radial-gradient(circle_at_top,rgba(176,138,90,0.06),transparent_50%)]">
+  </div>
+
+  <p-card 
+    class="relative w-full max-w-md 
+           px-8 py-10
+           shadow-sm">
+
+    <!-- Header -->
+    <div class="text-center mb-10">
+
+      <!-- Linha dourada minimal -->
+      <div class="w-12 h-[1px] bg-[rgb(var(--accent))] mx-auto mb-6"></div>
+
+      <h1 class="font-display text-2xl tracking-[0.2em] font-light">
+        LOREN MODAS
+      </h1>
+
+      <p class="text-sm text-[rgb(var(--text-secondary))] mt-3 font-light">
+        Painel Administrativo
+      </p>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="form"
+          (ngSubmit)="login()"
+          class="space-y-8">
+
+      <!-- Email -->
+      <p-floatLabel>
+        <input
+          pInputText
+          id="email"
+          formControlName="email"
+          class="w-full"
+        />
+        <label for="email">E-mail</label>
+      </p-floatLabel>
+
+      <!-- Senha -->
+      <p-floatLabel>
+        <p-password
+          inputId="senha"
+          formControlName="senha"
+          [feedback]="false"
+          toggleMask="true"
+          styleClass="w-full"
+          inputStyleClass="w-full">
+        </p-password>
+        <label for="senha">Senha</label>
+      </p-floatLabel>
+
+      <div *ngIf="error"
+           class="text-sm text-red-500 text-center">
+        {{ error }}
+      </div>
+
+      <p-button
+        type="submit"
+        label="Entrar"
+        [loading]="loading"
+        styleClass="w-full uppercase tracking-[0.2em] font-medium">
+      </p-button>
+
+    </form>
+
+  </p-card>
+
+</section>
